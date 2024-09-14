@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Signup - Open Eye Analytics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+        }
+        .navbar {
+            background-color: #003366; /* Dark blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .signup-form {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background-color: #003366;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        .footer {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .form-section {
+            margin-bottom: 15px;
+        }
+        .btn-primary:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Font size adjustments */
+        h2 {
+            font-size: 17px; /* Default for mobile */
+        }
+
+        .form-group label {
+            font-size: 17px; /* Default for mobile */
+        }
+
+        /* Media query for large screens */
+        @media (min-width: 992px) {
+            h2 {
+                font-size: 27px;
+            }
+
+            .form-group label {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Signup Form -->
+    <div class="signup-form">
+        <h2 class="text-center">Influencer Signup</h2>
+        <form id="signupForm" action="/oeanalytics/influencer/dashboard/edit_profile/form" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <!-- Column 1 -->
+                <div class="col-md-4 form-section">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" value="{{ user.password }}" name="password" 
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                               title="Password must be at least 8 characters long and contain at least one number, one uppercase and one lowercase letter." 
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" value="{{ user.first_name }}" name="first_name" >
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" value="{{ user.last_name }}" name="last_name" >
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <input type="text" class="form-control" id="bio" value="{{ user.bio }}" name="bio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" value="{{ user.address }}" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <input type="text" class="form-control" id="district" value="{{ user.district }}" name="district" required>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div class="col-md-4 form-section">
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" value="{{ user.state }}" name="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" class="form-control" id="pincode" value="{{ user.pincode|int }}" name="pincode" 
+                               pattern="\d{6}" 
+                               title="Pincode must be exactly 6 digits." 
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact</label>
+                        <input type="text" class="form-control" id="contact" value="{{ user.contact|int }}" name="contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="instagram_id">Instagram ID</label>
+                        <input type="text" class="form-control" id="instagram_id" value="{{ user.instagram_id }}" name="instagram_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin_id">LinkedIn ID</label>
+                        <input type="text" class="form-control" id="linkedin_id" value="{{ user.linkedin_id }}" name="linkedin_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook_id">Facebook ID</label>
+                        <input type="text" class="form-control" id="facebook_id" value="{{ user.facebook_id }}" name="facebook_id" required>
+                    </div>
+                </div>
+                <!-- Column 3 -->
+                <div class="col-md-4 form-section">
+                    <div class="form-group">
+                        <label for="x_id">X ID</label>
+                        <input type="text" class="form-control" id="x_id" value="{{ user.x_id }}" name="x_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categories</label>
+                        <select class="form-control" id="category" value="{{ user.category }}" name="category">
+                          {% for category in categories %}
+                            <option value="{{ category.category }}">{{ category.category }}</option>
+                          {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="insta_f">Instagram Followers</label>
+                        <input type="number" class="form-control" id="insta_f" value="{{ user.insta_f }}" name="insta_f" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin_f">LinkedIn Followers</label>
+                        <input type="number" class="form-control" id="linkedin_f" value="{{ user.linkedin_f }}" name="linkedin_f" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook_f">Facebook Followers</label>
+                        <input type="number" class="form-control" id="facebook_f" value="{{ user.facebook_f }}" name="facebook_f" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="x_f">X Followers</label>
+                        <input type="number" class="form-control" id="x_f" value="{{ user.x_f }}" name="x_f" required>
+                    </div>
+                </div>
+            </div>
+            <!-- Centered Signup Button -->
+            <div class="text-center">
+                <button type="submit" id="submitButton" class="btn btn-primary btn-block" >Update</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

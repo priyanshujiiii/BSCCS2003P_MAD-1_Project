@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Open Eye Analytics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #003366; /* Dark blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .signup-form {
+            max-width: 1000px;
+            margin: 180px auto;
+            padding: 50px;
+            border-radius: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background-color: #003366;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        .footer {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto; /* Pushes the footer to the bottom of the page */
+        }
+        .navbar-nav .dropdown-menu {
+            background-color: #003366; /* Dark blue */
+            border: none;
+        }
+        .navbar-nav .dropdown-item {
+            color: #ffffff;
+        }
+        .navbar-nav .dropdown-item:hover {
+            background-color: #00509e; /* Lighter blue on hover */
+        }
+        .features {
+            margin-top: 50px;
+        }
+        .feature-item {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Open Eye Analytics</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Sign Up Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="signupDropdownButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sign Up
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="signupDropdownButton">
+                        <a class="dropdown-item" href="{{ url_for('influencer_signup') }}">Sign Up as Influencer</a>
+                        <a class="dropdown-item" href="{{ url_for('sponsor_signup') }}">Sign Up as Sponsor</a>
+                    </div>
+                </li>
+                <!-- Sign In Dropdown -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signin') }}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Features</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+      </div>
+    
+      <script>
+          // Function to remove flash messages after 3 seconds
+          document.addEventListener('DOMContentLoaded', function () {
+              const flashMessages = document.querySelectorAll('.flash-message');
+              flashMessages.forEach(function (flash) {
+                  setTimeout(function () {
+                      flash.remove();
+                  }, 3000);
+              });
+          });
+      </script>
+    <!-- Sign In Form -->
+    <div class="signup-form">
+        <h2 class="text-center">Sign In</h2>
+        <form action="/oeanalytics/login" method="POST">
+            <div class="form-group">
+                <label for="user_role">Select Role</label>
+                <select class="form-control" id="user_role" name="user_role" required>
+                    <option value="admin">Admin</option>
+                    <option value="influencer">Influencer</option>
+                    <option value="sponsor">Sponsor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="user_id">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Open Eye Analytics. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

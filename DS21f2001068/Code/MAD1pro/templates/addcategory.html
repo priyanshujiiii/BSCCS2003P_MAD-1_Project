@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Category</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .form-container {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+    <div class="form-container container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 style="font-size: 20px;">Add Category</h4>
+              </div>
+              <div class="card-body">
+                <form action="/oeanalytics/admin/dashboard/add_category" method="POST" enctype="multipart/form-data" id="categoryForm">
+                    <div class="form-group">
+                      <label for="category" style="font-size: 17px;">Category:</label>
+                      <input type="text" class="form-control" id="category" name="category" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="description" style="font-size: 17px;">Description:</label>
+                      <textarea class="form-control" id="description" name="description" rows="3" required style="font-size: 17px;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="font-size: 17px;" disabled>Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+
+<script>
+    function validateForm() {
+        const category = document.getElementById('category').value.trim();
+        const description = document.getElementById('description').value.trim();
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (category.length > 0 && description.length > 0) {
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = true;
+        }
+    }
+
+    document.getElementById('category').addEventListener('input', validateForm);
+    document.getElementById('description').addEventListener('input', validateForm);
+</script>
+
+</body>
+</html>

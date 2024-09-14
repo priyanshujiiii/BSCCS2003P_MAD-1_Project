@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table {
+            margin-top: 20px;
+        }
+        .btn-edit, .btn-delete {
+            margin: 0 5px;
+        }
+        .btn-view {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center" style="font-size: 17px;">Sponser</h1>
+
+        <!-- Campaign Table -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='username') }}">Username</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='first_name') }}">First Name</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='company_name') }}">Company Name</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='industry') }}">Industry</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='positions') }}">Positions</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='contact') }}">Contact</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='district') }}">District</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='state') }}">State</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='pincode') }}">Pincode</a>
+                    </th>
+                    
+                    <th style="font-size: 17px;">Delete</th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter_sponser',column='flag') }}">Flag</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sponser in sponsers %}
+                <tr>
+                    <td style="font-size: 17px;">{{ sponser.username }}</td>
+                    <td style="font-size: 17px;">{{ sponser.first_name }}</td>
+                    <td style="font-size: 17px;">{{ sponser.company_name }}</td>
+                    <td style="font-size: 17px;">{{ sponser.industry }}</td>
+                    <td style="font-size: 17px;">{{ sponser.positions }}</td>
+                    <td style="font-size: 17px;">{{ sponser.contact }}</td>
+                    <td style="font-size: 17px;">{{ sponser.district }}</td>
+                    <td style="font-size: 17px;">{{ sponser.state }}</td>
+                    <td style="font-size: 17px;">{{ sponser.pincode }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_sponser_delete', username=sponser.username) }}" class="btn btn-danger">Delete</a>
+                    </td>
+                    <td>
+                        {% if sponser.flag == 1 %}
+                            <a href="{{ url_for('admin_sponsor_flag', id=sponser.username, flag=0) }}" class="btn btn-warning">Unflag</a>
+                        {% else %}
+                            <a href="{{ url_for('admin_sponsor_flag', id=sponser.username, flag=1) }}" class="btn btn-success">Flag</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

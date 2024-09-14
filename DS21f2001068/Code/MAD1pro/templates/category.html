@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Management</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .btn-group .btn {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'warning' %}
+                        <div class="flash-message alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="flash-message alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <script>
+        // Function to remove flash messages after 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function (flash) {
+                setTimeout(function () {
+                    flash.remove();
+                }, 3000);
+            });
+        });
+    </script>
+
+    <div class="container mt-5">
+        <h1 style="font-size: 20px;">Category Management</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="font-size: 14px;">Category</th>
+                    <th style="font-size: 14px;">Description</th>
+                    <th style="font-size: 14px;">Date</th>
+                    <th style="font-size: 14px;">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td style="font-size: 14px;">{{ category.category }}</td>
+                    <td style="font-size: 14px;">{{ category.description }}</td>
+                    <td style="font-size: 14px;">{{ category.date }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_cat_page', category=category.category) }}" class="btn btn-sm btn-warning" style="font-size: 14px;">Edit</a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

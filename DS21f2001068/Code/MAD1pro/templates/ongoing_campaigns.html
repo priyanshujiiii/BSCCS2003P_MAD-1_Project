@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ongoing Campaigns - Open Eye Analytics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #003366; /* Dark blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .hero-section {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .campaign-list {
+            margin-top: 30px;
+        }
+        .footer {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Open Eye Analytics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="influencer_home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Ongoing Campaigns</h1>
+        <p>Check if there are any ongoing campaigns.</p>
+    </div>
+
+    <!-- Campaign List -->
+    <div class="container campaign-list">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title">Ongoing Campaigns</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="campaignStatus">
+                            <!-- This section will be populated with campaign data -->
+                            <p>No ongoing campaigns at the moment.</p>
+                        </div>
+                        <!-- Example campaign list -->
+                        <!--
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h5>Campaign Name 1</h5>
+                                <p>Description of Campaign 1</p>
+                                <p><strong>Start Date:</strong> 2024-07-01</p>
+                                <p><strong>End Date:</strong> 2024-07-31</p>
+                            </li>
+                            <li class="list-group-item">
+                                <h5>Campaign Name 2</h5>
+                                <p>Description of Campaign 2</p>
+                                <p><strong>Start Date:</strong> 2024-07-15</p>
+                                <p><strong>End Date:</strong> 2024-08-15</p>
+                            </li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Open Eye Analytics. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Example script to show ongoing campaigns
+        // Replace this script with actual data fetching from the server
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var ongoingCampaigns = []; // Replace with actual data from server
+            var campaignStatus = document.getElementById('campaignStatus');
+            if (ongoingCampaigns.length > 0) {
+                var list = '<ul class="list-group">';
+                ongoingCampaigns.forEach(function(campaign) {
+                    list += '<li class="list-group-item">';
+                    list += '<h5>' + campaign.name + '</h5>';
+                    list += '<p>' + campaign.description + '</p>';
+                    list += '<p><strong>Start Date:</strong> ' + campaign.startDate + '</p>';
+                    list += '<p><strong>End Date:</strong> ' + campaign.endDate + '</p>';
+                    list += '</li>';
+                });
+                list += '</ul>';
+                campaignStatus.innerHTML = list;
+            } else {
+                campaignStatus.innerHTML = '<p>No ongoing campaigns at the moment.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

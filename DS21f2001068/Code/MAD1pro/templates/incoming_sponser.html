@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table {
+            margin-top: 20px;
+        }
+        .btn-edit, .btn-delete {
+            margin: 0 5px;
+        }
+        .btn-view {
+            margin: 0 5px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .table th a {
+            font-size: 17px;
+            color: #007bff; /* Bootstrap primary color */
+            text-decoration: none;
+        }
+        .table th a:hover {
+            text-decoration: underline;
+            color: #0056b3; /* Darker shade for hover effect */
+        }
+        .table th {
+            text-align: center; /* Center align the headers */
+            vertical-align: middle; /* Center vertically */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center" style="font-size: 17px;">Incoming Ad Request</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <a href="{{ url_for('incoming_sponser', filter='All') }}">All</a>
+                    </th>
+                    <th>
+                        <a href="{{ url_for('incoming_sponser', filter='Not Responded') }}">Not Responded</a>
+                    </th>
+                    <th>
+                        <a href="{{ url_for('incoming_sponser', filter='Accepted') }}">Accepted</a>
+                    </th>
+                    <th>
+                        <a href="{{ url_for('incoming_sponser', filter='Rejected') }}">Rejected</a>
+                    </th>
+                </tr>
+            </thead>
+        <!-- Campaign Table -->
+        <table class="table table-striped table-bordered">
+        <!-- Campaign Table -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th style="font-size: 17px;">Request</th>
+                    <th style="font-size: 17px;">Influencer</th>
+                    <th style="font-size: 17px;">Campaign Id</th>
+                    <th style="font-size: 17px;">Campaign Name</th>
+                    <th style="font-size: 17px;">Payment Amount</th>
+                    <th style="font-size: 17px;">Status</th>
+                    <th style="font-size: 17px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr><td style="font-size: 17px;">{{ request.request_id }}</td>
+                    <td style="font-size: 17px;">{{ request.influencer_u }}</td>
+                    <td style="font-size: 17px;">{{ request.campaign_id }}</td>
+                    <td style="font-size: 17px;">{{ request.campaign_name }}</td>
+                    <td style="font-size: 17px;">{{ request.payment_amount }}</td>
+                    <!-- Display status as text -->
+                    <td style="font-size: 17px;">
+                        {% if request.status == 0 %}
+                            Not Responded
+                        {% elif request.status == 1 %}
+                            Accepted
+                        {% elif request.status == 2 %}
+                            Rejected
+                        {% elif request.status == 3 %}
+                            Ad Closed
+                        {% elif request.status == 4 %}
+                            Campaign Banned
+                        {% elif request.status == 5 %}
+                            Influencer Banned
+                        {% elif request.status == 6 %}
+                            Sponser Banned
+                        {% endif %}
+                    </td>
+
+                    <!-- Conditional rendering of buttons -->
+                    <td>
+                        {% if request.status == 0 %}
+                            <!-- If not responded, show both Accept and Reject buttons -->
+                            <a href="{{ url_for('update_request_sponser', request_id=request.request_id, new_status=1) }}" class="btn btn-success">Accept</a>
+                            <a href="{{ url_for('update_request_sponser', request_id=request.request_id, new_status=2) }}" class="btn btn-danger">Reject</a>
+                        {% elif request.status == 1 %}
+                            <!-- If accepted or rejected, freeze the buttons -->
+                            <button class="btn btn-success" disabled>Accepted</button>
+                        {% elif request.status == 2 %}
+                            <button class="btn btn-danger" disabled>Reject</button>
+                        {% elif request.status == 3 %}
+                            <button class="btn btn-danger" disabled>Ad Closed</button>
+                        {% elif request.status == 4 %}
+                            <button class="btn btn-danger" disabled>Campaign Banned</button>
+                        {% elif request.status == 5 %}
+                            <button class="btn btn-danger" disabled>Influencer Banned</button>
+                        {% elif request.status == 6 %}
+                            <button class="btn btn-danger" disabled>Sponser Banned</button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 17px; /* Set default font size for the whole page */
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .table {
+            margin-bottom: 20px;
+        }
+        th, td {
+            font-size: 17px; /* Ensure table headers and data cells have the correct font size */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Database Statistics</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Counts</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Table</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Admin</td>
+                            <td>{{ admin_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Campaign</td>
+                            <td>{{ campaign_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>{{ category_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Influencer</td>
+                            <td>{{ influencer_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Payment</td>
+                            <td>{{ payment_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Request</td>
+                            <td>{{ request_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Sponsor</td>
+                            <td>{{ sponsor_count }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Request Statuses</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for status, count in request_status_dict.items() %}
+                        <tr>
+                            <td>
+                                {% if status == 0 %}Not Responded
+                                {% elif status == 1 %}Accepted
+                                {% elif status == 2 %}Rejected
+                                {% elif status == 3 %}Ad Closed
+                                {% elif status == 4 %}Campaign Banned
+                                {% elif status == 5 %}Influencer Banned
+                                {% elif status == 6 %}Sponsor Banned
+                                {% endif %}
+                            </td>
+                            <td>{{ count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Payment Statuses</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for status, count in payment_status_dict.items() %}
+                        <tr>
+                            <td>
+                                {% if status == 0 %}Failed
+                                {% elif status == 1 %}Successful
+                                {% endif %}
+                            </td>
+                            <td>{{ count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

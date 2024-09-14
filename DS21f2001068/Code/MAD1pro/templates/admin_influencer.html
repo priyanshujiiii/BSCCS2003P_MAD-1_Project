@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table {
+            margin-top: 20px;
+        }
+        .btn-edit, .btn-delete {
+            margin: 0 5px;
+        }
+        .btn-view {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center" style="font-size: 17px;">Influencer</h1>
+
+        <!-- Campaign Table -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='username') }}">Username</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='first_name') }}">First Name</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='state') }}">State</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='category') }}">Category</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='insta_f') }}">Instagram</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='facebook_f') }}">Facebook</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='linkedin_f') }}">Linked in</a>
+                    </th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='x_f') }}">X (Twitter)</a>
+                    </th>
+                    
+                    <th style="font-size: 17px;">Delete</th>
+                    <th style="font-size: 17px;">
+                        <a href="{{ url_for('filter',column='flag') }}">Flag</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for influencer in influencers %}
+                <tr>
+                    <td style="font-size: 17px;">{{ influencer.username }}</td>
+                    <td style="font-size: 17px;">{{ influencer.first_name }}</td>
+                    <td style="font-size: 17px;">{{ influencer.state }}</td>
+                    <td style="font-size: 17px;">{{ influencer.category }}</td>
+                    <td style="font-size: 17px;">{{ influencer.insta_f }}</td>
+                    <td style="font-size: 17px;">{{ influencer.facebook_f }}</td>
+                    <td style="font-size: 17px;">{{ influencer.linkedin_f }}</td>
+                    <td style="font-size: 17px;">{{ influencer.x_f }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_influencer_delete', username=influencer.username) }}" class="btn btn-danger">Delete</a>
+                    </td>
+                    <td>
+                        {% if influencer.flag == 1 %}
+                            <a href="{{ url_for('admin_influencer_flag', id=influencer.username, flag=0) }}" class="btn btn-warning">Unflag</a>
+                        {% else %}
+                            <a href="{{ url_for('admin_influencer_flag', id=influencer.username, flag=1) }}" class="btn btn-success">Flag</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

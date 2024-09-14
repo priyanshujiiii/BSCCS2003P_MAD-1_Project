@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Home - Open Eye Analytics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #003366; /* Dark blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .hero-section {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .plan-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .plan-card:hover {
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+        }
+        .plan-card h3 {
+            flex: 1;
+        }
+        .plan-card p:last-child {
+            margin-top: auto;
+        }
+        .btn-primary {
+            background-color: #003366;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        .footer {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Open Eye Analytics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('oeanalytics')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('sponsor_dashboard', template='template.html') }}">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome, Sponsor!</h1>
+        <p>Choose a plan and start your ad campaign today.</p>
+    </div>
+
+    <!-- Campaign Plans Section -->
+    <div class="container">
+        <h2 class="text-center">Choose Your Campaign Plan</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Ultimate Plan</h3>
+                    <p>The most comprehensive plan offering unmatched reach and custom options.</p>
+                    <p><strong>Price:</strong> $6000</p>
+                    <a href="{{ url_for('choose_plan', value=6000) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Diamond Plan</h3>
+                    <p>Exclusive plan with premium features and highest visibility options.</p>
+                    <p><strong>Price:</strong> $5000</p>
+                    <a href="{{ url_for('choose_plan', value=5000) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Platinum Plan</h3>
+                    <p>Top-tier plan with maximum reach and customization options. Best for high-impact campaigns.</p>
+                    <p><strong>Price:</strong> $4000</p>
+                    <a href="{{ url_for('choose_plan', value=4000) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Gold Plan</h3>
+                    <p>Enhanced features and support for highly-targeted campaigns. Ideal for extensive outreach.</p>
+                    <p><strong>Price:</strong> $3000</p>
+                    <a href="{{ url_for('choose_plan', value=3000) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Premium Plan</h3>
+                    <p>Comprehensive plan for large-scale campaigns. Includes advanced features and premium support.</p>
+                    <p><strong>Price:</strong> $2000</p>
+                    <a href="{{ url_for('choose_plan', value=2000) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Standard Plan</h3>
+                    <p>Ideal for medium-sized campaigns with moderate reach. Includes additional targeting options and analytics.</p>
+                    <p><strong>Price:</strong> $1000</p>
+                    <a href="{{ url_for('choose_plan', value=1000) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Silver Plan</h3>
+                    <p>Cost-effective plan with essential features and limited reach.</p>
+                    <p><strong>Price:</strong> $750</p>
+                    <a href="{{ url_for('choose_plan', value=750) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="plan-card">
+                    <h3>Basic Plan</h3>
+                    <p>Perfect for small campaigns with limited reach. Includes basic ad options and reporting.</p>
+                    <p><strong>Price:</strong> $500</p>
+                    <a href="{{ url_for('choose_plan', value=500) }}" class="btn btn-primary">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Open Eye Analytics. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

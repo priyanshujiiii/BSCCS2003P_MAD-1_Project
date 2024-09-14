@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Open Eye Analytics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #003366; /* Dark blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .hero-section {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+        .category-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+        }
+        .btn-primary {
+            background-color: #003366;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        .footer {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <script>
+        // Function to remove flash messages after 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function (flash) {
+                setTimeout(function () {
+                    flash.remove();
+                }, 3000);
+            });
+        });
+    </script>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Open Eye Analytics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                
+                <a class="nav-link" href="{{ url_for('influencer_dashboard', template='template.html') }}">Dashboard</a>
+                <a class="nav-link" href="url_for('oeanalytics')">Logout</a>
+               
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to Open Eye Analytics</h1>
+        <p>Your trusted partner in data-driven insights and solutions.</p>
+        <a href="{{ url_for('influencer_signup') }}" class="btn btn-primary">Get Started</a>
+    </div>
+    <div class="container">
+        <h2 class="section-title">Our Categories</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for category, count in categories %}
+            <div class="col-md-4">
+                <div class="category-card">
+                    <h3>{{ category }}</h3>
+                    <p>Number of campaigns: {{ count }}</p>
+                    <a href="{{ url_for('campaigns_by_category', category=category,filter='all') }}" class="btn btn-primary">View Campaigns</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Open Eye Analytics. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

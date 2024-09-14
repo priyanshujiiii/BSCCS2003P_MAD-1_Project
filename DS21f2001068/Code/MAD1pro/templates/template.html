@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Animation */
+    @keyframes slideIn {
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .welcome-message {
+      animation: slideIn 1s ease-out;
+    }
+
+    .sun {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, #ffd700 20%, transparent 30%);
+      border-radius: 50%;
+      animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .sun::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background-color: #ffd700;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center welcome-message">
+        <div class="sun"></div>
+        <h1 class="display-4 mt-3">Welcome to Dashboard</h1>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

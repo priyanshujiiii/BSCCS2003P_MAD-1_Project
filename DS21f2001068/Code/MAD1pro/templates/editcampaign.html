@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Information Form with Background Video</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+    .form-container {
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    .flash-message {
+      margin: 15px 0;
+    }
+    .form-column {
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'warning' %}
+                    <div class="flash-message alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class="flash-message alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+  </div>
+
+  <script>
+    // Function to remove flash messages after 3 seconds
+    document.addEventListener('DOMContentLoaded', function () {
+        const flashMessages = document.querySelectorAll('.flash-message');
+        flashMessages.forEach(function (flash) {
+            setTimeout(function () {
+                flash.remove();
+            }, 3000);
+        });
+    });
+
+    
+  </script>
+
+  <div class="form-container container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header">
+            <h4>Edit Campaign</h4>
+          </div>
+          <div class="card-body">
+            <form action="{{ url_for('update_campaign', campaign_id=campaign.campaignid) }}" method="POST" enctype="multipart/form-data" id="campaignForm">
+              <div class="row">
+                <!-- First Column -->
+                <div class="col-md-4 form-column">
+                  <div class="form-group">
+                    <label for="campaignName"  style="font-size: 17px;">Campaign Name</label>
+                    <input type="text" class="form-control" id="campaignName" name="campaignName" placeholder="Enter campaign name" value="{{ campaign.campaignname }}" >
+                  </div>
+                  <div class="form-group">
+                    <label for="category"  style="font-size: 17px;">Category</label>
+                    <input type="text" class="form-control" id="category" name="category" placeholder="Enter campaign category" value="{{ campaign.category }}" >
+                  </div>
+                  <div class="form-group">
+                    <label for="goals"  style="font-size: 17px;">Goals</label>
+                    <textarea class="form-control" id="goals" name="goals" rows="3" placeholder="Enter campaign goals" value="{{ campaign.goals }}"  ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="userid"  style="font-size: 17px;">User ID</label>
+                    <input type="text" class="form-control" id="userid" name="userid" placeholder="Enter your user ID" value="{{ campaign.userid }}"  >
+                  </div>
+                </div>
+
+                <!-- Second Column -->
+                <div class="col-md-4 form-column">
+                  <div class="form-group">
+                    <label for="campaignDescription"  style="font-size: 17px;">Campaign Description</label>
+                    <textarea class="form-control" id="campaignDescription" name="campaignDescription" rows="3" placeholder="{{ campaign.campaign_description }}"  value="{{ campaign.campaign_description }}" ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="startDate"  style="font-size: 17px;">Start Date</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate"  value="{{ campaign.start_date }}"  >
+                  </div>
+                  <div class="form-group">
+                    <label for="endDate"  style="font-size: 17px;">End Date</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate" value="{{ campaign.end_date }}"  >
+                  </div>
+                  <div class="form-group">
+                    <label for="visibility"  style="font-size: 17px;">Visibility</label>
+                    <select class="form-control" id="visibility" name="visibility"  value="{{ campaign.visibility }}" >
+                      <option value="Public"  style="font-size: 17px;">Public</option>
+                      <option value="Private"  style="font-size: 17px;">Private</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Third Column -->
+                <div class="col-md-4 form-column">
+                  <div class="form-group">
+                    <label for="budget"  style="font-size: 17px;">Budget</label>
+                    <input type="number" class="form-control" id="budget" name="budget" placeholder="Enter budget" value="{{ campaign.budget }}" >
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary"  style="font-size: 20px;">Update Book</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

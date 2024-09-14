@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Payments Table</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="font-size: 17px";>Campaign ID</th>
+                    <th style="font-size: 17px";>Campaign Name</th>
+                    <th style="font-size: 17px";>Influencer </th>
+                    <th style="font-size: 17px";>Amount</th>
+                    <th style="font-size: 17px";>Status</th>
+                    <th style="font-size: 17px";>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                    <tr>
+                        <td style="font-size: 17px";>{{ payment.campaign_id }}</td>
+                        <td style="font-size: 17px";>{{ payment.campaign_name }}</td>
+                        <td style="font-size: 17px";>{{ payment.influencer_u }}</td>
+                        <td style="font-size: 17px";>{{ payment.amount }}</td>
+                        <td style="font-size: 17px";>
+                            {% if payment.status == 0 %}
+                                <span class="badge badge-warning">Pending</span>
+                            {% elif payment.status == 1 %}
+                                <span class="badge badge-success">Done</span>
+                            {% endif %}
+                        </td>
+                        <td style="font-size: 17px";>
+                            {% if payment.status == 0 %}
+                                <a href="{{ url_for('make_payment_track', id=payment.id) }}" class="btn btn-primary">Make Payment</a>
+                            {% elif payment.status == 1 %}
+                                <span class="text-success">Payment Done</span>
+                            {% endif %}
+
+                        </td>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

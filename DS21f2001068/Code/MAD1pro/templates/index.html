@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Eye Analytics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: #ef0606; /* Dark blue */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .navbar-nav .dropdown-menu {
+            background-color: #003366; /* Dark blue */
+            border: none;
+        }
+        .navbar-nav .dropdown-item {
+            color: #ffffff;
+        }
+        .navbar-nav .dropdown-item:hover {
+            background-color: #00509e; /* Lighter blue on hover */
+        }
+        .features {
+            margin-top: 50px;
+        }
+        .feature-item {
+            margin-bottom: 20px;
+        }
+        .feature-item img {
+        width: 300px; /* Set a fixed width for all images */
+        height: 300px; /* Set the same height to make the image square */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+        border-radius: 2px; /* Optional: adds rounded corners */
+        }
+        .btn-signin, .btn-signup {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #003366; /* Dark blue */
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto; /* Pushes the footer to the bottom of the page */
+        }
+        .footer .dropdown-menu {
+            background-color: #003366; /* Dark blue */
+            border: none;
+        }
+        .footer .dropdown-item {
+            color: #ffffff;
+        }
+        .footer .dropdown-item:hover {
+            background-color: #00509e; /* Lighter blue on hover */
+        }
+        h6 {
+            font-weight: bold; /* Or '600' for semi-bold */
+            font-size: 28px; /* Adjust size as needed */
+            text-align: center;
+            line-height: 1.3; /* Adjust line height for readability */
+            letter-spacing: 0.5px; /* Slightly increased letter spacing */
+            color: #000000; /* Black color */
+            animation: colorChange 6s infinite;
+        }
+        /* Color Change Animation */
+        @keyframes colorChange {
+            0% {
+                color: #000000; /* Black */
+            }
+            25% {
+                color: #ff6347; /* Tomato */
+            }
+            50% {
+                color: #4682b4; /* Steel Blue */
+            }
+            75% {
+                color: #32cd32; /* Lime Green */
+            }
+            100% {
+                color: #000000; /* Back to Black */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Open Eye Analytics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Sign Up Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="signupDropdownButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sign Up
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="signupDropdownButton">
+                        <a class="dropdown-item" href="{{ url_for('influencer_signup') }}">Sign Up as Influencer</a>
+                        <a class="dropdown-item" href="{{ url_for('sponsor_signup') }}">Sign Up as Sponsor</a>
+                    </div>
+                </li>
+                <!-- Sign In Dropdown -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signin') }}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Features</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+      </div>
+    
+      <script>
+          // Function to remove flash messages after 3 seconds
+          document.addEventListener('DOMContentLoaded', function () {
+              const flashMessages = document.querySelectorAll('.flash-message');
+              flashMessages.forEach(function (flash) {
+                  setTimeout(function () {
+                      flash.remove();
+                  }, 3000);
+              });
+          });
+      </script>
+    <!-- Main Content -->
+    <div class="container flex-grow-1">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="mt-5">Welcome to Open Eye Analytics</h1>
+                <p class="lead">Explore our features and sign in to get started.</p>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div id="features" class="features text-center">
+            <div class="row">
+                <div class="col-md-4 feature-item">
+                    <img src="{{ url_for('static', filename='images/image.png') }}" alt="Feature 1">
+                    <h6>Discover in-depth analytics and insights to drive your decisions.</h6>
+                </div>
+                <div class="col-md-4 feature-item">
+                    <img src="{{ url_for('static', filename='images/image2.png') }}" alt="Feature 2">
+                    <h6>Connect with influencers and manage your campaigns effortlessly.</h6>
+                </div>
+                <div class="col-md-4 feature-item">
+                    <img src="{{ url_for('static', filename='images/image3.png') }}" alt="Feature 3">
+                    <h6>Track performance and optimize your strategies with real-time data.</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Open Eye Analytics. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

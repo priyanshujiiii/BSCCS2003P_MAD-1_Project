@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table {
+            margin-top: 20px;
+        }
+        .btn-edit, .btn-delete {
+            margin: 0 5px;
+        }
+        .btn-view {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center" style="font-size: 17px;">Campaign</h1>
+
+        <!-- Campaign Table -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th style="font-size: 17px;">
+                        Campaign ID
+                    </th>
+                    <th style="font-size: 17px;">
+                        Campaign Name
+                    </th>
+                    <th style="font-size: 17px;">
+                        Category
+                    </th>
+                    <th style="font-size: 17px;">
+                        Start Date
+                    </th>
+                    <th style="font-size: 17px;">
+                        End Date
+                    </th>
+                    <th style="font-size: 17px;">
+                        Visibility
+                    </th>
+                    <th style="font-size: 17px;">
+                        Budget
+                    </th>
+                    <th style="font-size: 17px;">
+                        View
+                    </th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for campaign in campaigns %}
+                <tr>
+                    <td style="font-size: 17px;">{{ campaign.campaignid }}</td>
+                    <td style="font-size: 17px;">{{ campaign.campaignname }}</td>
+                    <td style="font-size: 17px;">{{ campaign.category }}</td>
+                    <td style="font-size: 17px;">{{ campaign.start_date }}</td>
+                    <td style="font-size: 17px;">{{ campaign.end_date }}</td>
+                    <td style="font-size: 17px;">{{ campaign.visibility }}</td>
+                    <td style="font-size: 17px;">${{ campaign.budget }}</td>
+                    <td>
+                        <a href="{{ url_for('show_my_campaign', campaignid=campaign.campaignid) }}" class="btn btn-info">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
