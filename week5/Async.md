@@ -1,1 +1,0 @@
-<p>Asynchronous programming is a programming paradigm that allows a program to perform multiple tasks simultaneously without waiting for one task to finish before starting the next one. In other words, it enables a program to execute tasks in a non-blocking manner, so that it can continue to operate while waiting for slow operations to complete.</p>
